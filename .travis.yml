@@ -9,13 +9,15 @@ mono: none
 dotnet: 2.0.0
 dist: trusty
 
-script:
+before_script:
   - dotnet restore
   - npm install
+
+script:
   - dotnet publish -c Release -o ./Publish
-  - docker build -t beermecore .
 
 after_success:
-    - docker tag beermecore jpinc/beerme
-    - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    - docker push jpinc/beerme;
+  - docker build -t beermecore .
+  - docker tag beermecore jpinc/beerme
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+  - docker push jpinc/beerme;
