@@ -6,6 +6,7 @@ export class Home extends React.Component<RouteComponentProps<{}>, {}> {
         return <div>
             <h1 className="title">Beer Me!</h1>
             <img className="beer" src="images/beerme.png" alt="Beer Me!"/>
+            <p className="subtitle">... I'm thirsty</p>
         </div>;
     }
 }

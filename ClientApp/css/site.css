@@ -23,6 +23,16 @@ h1.title {
     text-align: center;
 }
 
+.subtitle {
+    color: #FFF;
+    text-align: center;
+    font-family: 'Permanent Marker', cursive;
+    font-size: 2em;
+    text-shadow: -1px 0 black, 0 2px black, 2px 0 black, 0 -1px black;
+    display: block;
+    margin: 0 auto;
+}
+
 .main-nav li .glyphicon {
     margin-right: 10px;
 }
