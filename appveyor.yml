@@ -30,6 +30,12 @@ max_jobs: 1
 # Build worker image (VM template)
 image: Visual Studio 2017
 
+environment:
+  DOCKER_USER:
+    secure: HbZcXoDDxnVGVXmnmEUeJw==
+  DOCKER_PASS:
+    secure: hnX1Ql2pk+d1spofSPIjceHvEGBNvz/pe/0GFcp0PqA=
+
 # build cache to preserve files/folders between builds
 cache:
   - packages -> **\packages.config  # preserve "packages" directory in the root of build folder but will reset it if packages.config is modified
@@ -47,6 +53,7 @@ install:
 
   # install modules
   - npm install
+  - docker version
 
 #---------------------------------#
 #       build configuration       #
@@ -79,6 +86,7 @@ before_build:
 # scripts to run after build
 after_build:
   - dotnet publish -c Release -o ./Publish
+  - docker build -t jpinc/beerme .
 
 #---------------------------------#
 #       tests configuration       #
@@ -96,6 +104,10 @@ artifacts:
 #---------------------------------#
 #     deployment configuration    #
 #---------------------------------#
+
+deploy_script:
+  - docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
+  - docker push jpinc/beerme
 
 #---------------------------------#
 #         notifications           #
