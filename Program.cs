@@ -20,7 +20,7 @@ namespace BeerMeCore
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://0.0.0.0:5000") // Ip as well as localhost
+                .UseUrls("http://0.0.0.0:80") // Ip as well as localhost
                 .Build();
     }
 }
