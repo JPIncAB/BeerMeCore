@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration.CommandLine;
 
 namespace BeerMeCore
 {
@@ -14,13 +15,17 @@ namespace BeerMeCore
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+             var config = new ConfigurationBuilder()
+                .AddCommandLine(args)
+                .Build();
+
+            BuildWebHost(args, config).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
+        public static IWebHost BuildWebHost(string[] args, IConfigurationRoot config) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://0.0.0.0:80") // Ip as well as localhost
+                .UseConfiguration(config)
                 .Build();
     }
 }
