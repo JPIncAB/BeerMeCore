@@ -86,7 +86,6 @@ before_build:
 # scripts to run after build
 after_build:
   - dotnet publish -c Release -o ./Publish
-  - docker build -t jpinc/beerme .
 
 #---------------------------------#
 #       tests configuration       #
@@ -105,9 +104,10 @@ artifacts:
 #     deployment configuration    #
 #---------------------------------#
 
-deploy_script:
-  - ps: docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
-  - ps: docker push jpinc/beerme
+# deploy_script:
+#   - ps: docker build -t jpinc/beerme .
+#   - ps: docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
+#   - ps: docker push jpinc/beerme
 
 #---------------------------------#
 #         notifications           #
