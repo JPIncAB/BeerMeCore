@@ -106,8 +106,8 @@ artifacts:
 #---------------------------------#
 
 deploy_script:
-  - docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
-  - docker push jpinc/beerme
+  - ps: docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASS"
+  - ps: docker push jpinc/beerme
 
 #---------------------------------#
 #         notifications           #

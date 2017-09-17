@@ -1,0 +1,25 @@
+sudo: required
+
+services:
+  - docker
+
+language: csharp
+solution: BeerMeCore.sln
+mono: none
+dotnet: 2.0.0
+node_js:
+  - "node"
+dist: trusty
+
+script:
+  - dotnet restore
+  - npm install
+  - dotnet publish -c Release -o ./Publish
+  - docker build -t beermecore .
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker tag beermecore jpinc/beerme
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+    docker push USER/REPO;
+    fi
